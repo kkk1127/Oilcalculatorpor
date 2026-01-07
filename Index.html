@@ -242,7 +242,7 @@
                 <!-- الخطوة 1: اختيار نوع النظام -->
                 <div id="step1" class="step">
                     <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
-                        <button onclick="selectCalculatorType('cars')" 
+                        <button onclick="selectCalculatorType('CarsOil')" 
                                 class="btn-gold text-black font-bold p-8 rounded-lg text-xl hover:scale-105 transition-transform">
                             🚗 قائمة السيارات
                         </button>
@@ -268,7 +268,7 @@
                     <div class="mb-6 relative">
                         <div class="relative">
                             <input type="text" 
-                                   id="carSearch" 
+                                   id="CarsOilearch" 
                                    placeholder="ابحث عن السيارة..." 
                                    class="input-gold w-full p-4 pr-12 rounded-lg text-lg">
                             <div class="absolute right-3 top-1/2 transform -translate-y-1/2 text-yellow-400 text-xl">
@@ -482,7 +482,7 @@
     </main>
 
     <script>
-        let carsData = [];
+        let CarsOilData = [];
         let stockData = [];
         let selectedCar = null;
         let selectedCarType = '';
@@ -542,29 +542,29 @@
             console.log('محاولة تحميل البيانات من Google Sheets...');
             
             try {
-                const carsSheetId = '1x2ongtstODqEEWh_jAwN8zLHjsYeIppk8EH_Q1CXMzk';
+                const CarsOilSheetId = '1x2ongtstODqEEWh_jAwN8zLHjsYeIppk8EH_Q1CXMzk';
                 const stockSheetId = '1ax4pCBDTm6Vkq-MZjmmOY1dgwKCUQS5x1GeffkUYOzI';
                 
-                const [carsResponse, stockResponse] = await Promise.all([
-                    fetch(`https://docs.google.com/spreadsheets/d/${carsSheetId}/gviz/tq?tqx=out:csv&sheet=Cars&timestamp=${Date.now()}`),
+                const [CarsOilResponse, stockResponse] = await Promise.all([
+                    fetch(`https://docs.google.com/spreadsheets/d/${CarsOilSheetId}/gviz/tq?tqx=out:csv&sheet=CarsOil&timestamp=${Date.now()}`),
                     fetch(`https://docs.google.com/spreadsheets/d/${stockSheetId}/gviz/tq?tqx=out:csv&sheet=Stock&timestamp=${Date.now()}`)
                 ]);
                 
                 // معالجة بيانات السيارات
-                if (carsResponse.ok) {
-                    const carsText = await carsResponse.text();
+                if (CarsOilResponse.ok) {
+                    const CarsOilText = await CarsOilResponse.text();
                     console.log('تم تحميل بيانات السيارات من الرابط الجديد بنجاح');
                     
-                    const realCarsData = processCarsData(carsText);
+                    const realCarsOilData = processCarsOilData(CarsOilText);
                     
-                    if (realCarsData.length > 0) {
-                        carsData = realCarsData;
-                        console.log('تم تحميل بيانات السيارات:', carsData.length, 'سيارة');
+                    if (realCarsOilData.length > 0) {
+                        CarsOilData = realCarsOilData;
+                        console.log('تم تحميل بيانات السيارات:', CarsOilData.length, 'سيارة');
                     } else {
                         console.warn('لم يتم العثور على بيانات سيارات صالحة');
                     }
                 } else {
-                    console.error('فشل في تحميل بيانات السيارات:', carsResponse.status);
+                    console.error('فشل في تحميل بيانات السيارات:', CarsOilResponse.status);
                 }
                 
                 // معالجة بيانات المخزون
@@ -585,7 +585,7 @@
                 }
                 
                 // التحقق من نجاح التحميل
-                if (carsData.length === 0 && stockData.length === 0) {
+                if (CarsOilData.length === 0 && stockData.length === 0) {
                     throw new Error('فشل في تحميل جميع البيانات');
                 }
                 
@@ -597,7 +597,7 @@
 
         // اختيار نوع الحاسبة
         function selectCalculatorType(type) {
-            if (type === 'cars') {
+            if (type === 'CarsOil') {
                 showStep('step2');
                 displayCarOptions();
             } else if (type === 'manual') {
@@ -610,7 +610,7 @@
         function displayCarOptions() {
             const container = document.getElementById('carOptions');
             
-            if (carsData.length === 0) {
+            if (CarsOilData.length === 0) {
                 container.innerHTML = `
                     <div class="col-span-full text-center text-red-400 text-lg">
                         لا توجد سيارات متاحة
@@ -619,8 +619,8 @@
                 return;
             }
             
-            function renderCars(cars) {
-                container.innerHTML = cars.map(car => {
+            function renderCarsOil(CarsOil) {
+                container.innerHTML = CarsOil.map(car => {
                     // حساب عدد الزيوت المتاحة من المخزون
                     const carViscosity = car.oilType;
                     const otherViscosities = car.otherOilTypes || [];
@@ -649,24 +649,24 @@
             }
             
             // عرض جميع السيارات في البداية
-            renderCars(carsData);
+            renderCarsOil(CarsOilData);
             
             // إعداد البحث
-            const searchInput = document.getElementById('carSearch');
+            const searchInput = document.getElementById('CarsOilearch');
             if (searchInput) {
                 searchInput.oninput = function(e) {
                     const searchTerm = e.target.value.toLowerCase();
-                    const filteredCars = carsData.filter(car => 
+                    const filteredCarsOil = CarsOilData.filter(car => 
                         car.carModel.toLowerCase().includes(searchTerm)
                     );
-                    renderCars(filteredCars);
+                    renderCarsOil(filteredCarsOil);
                 };
             }
         }
 
         // اختيار السيارة
         function selectCar(carModel) {
-            selectedCar = carsData.find(car => car.carModel === carModel);
+            selectedCar = CarsOilData.find(car => car.carModel === carModel);
             if (selectedCar) {
                 showStep('step3');
             }
@@ -1936,24 +1936,24 @@
             try {
                 isUpdating = true;
                 
-                const carsSheetId = '1-hVGrK0SqiLgXV_zaqhh2bqYCjjr4Q28jzWU8gG6jTU';
+                const CarsOilSheetId = '1-hVGrK0SqiLgXV_zaqhh2bqYCjjr4Q28jzWU8gG6jTU';
                 const stockSheetId = '1ax4pCBDTm6Vkq-MZjmmOY1dgwKCUQS5x1GeffkUYOzI';
                 
                 let hasUpdates = false;
                 
                 // التحقق من تحديثات السيارات
                 try {
-                    const carsUrl = `https://docs.google.com/spreadsheets/d/${carsSheetId}/gviz/tq?tqx=out:csv&sheet=Cars&timestamp=${Date.now()}`;
-                    const carsResponse = await fetch(carsUrl);
+                    const CarsOilUrl = `https://docs.google.com/spreadsheets/d/${CarsOilSheetId}/gviz/tq?tqx=out:csv&sheet=CarsOil&timestamp=${Date.now()}`;
+                    const CarsOilResponse = await fetch(CarsOilUrl);
                     
-                    if (carsResponse.ok) {
-                        const carsText = await carsResponse.text();
-                        const newCarsData = processCarsData(carsText);
+                    if (CarsOilResponse.ok) {
+                        const CarsOilText = await CarsOilResponse.text();
+                        const newCarsOilData = processCarsOilData(CarsOilText);
                         
-                        if (newCarsData.length > 0 && JSON.stringify(newCarsData) !== JSON.stringify(carsData)) {
-                            carsData = newCarsData;
+                        if (newCarsOilData.length > 0 && JSON.stringify(newCarsOilData) !== JSON.stringify(CarsOilData)) {
+                            CarsOilData = newCarsOilData;
                             hasUpdates = true;
-                            console.log('تم تحديث بيانات السيارات:', carsData.length, 'سيارة');
+                            console.log('تم تحديث بيانات السيارات:', CarsOilData.length, 'سيارة');
                         }
                     }
                 } catch (error) {
@@ -1991,8 +1991,8 @@
         }
         
         // معالجة بيانات السيارات
-        function processCarsData(carsText) {
-            const carsRows = carsText.split('\n').map(row => {
+        function processCarsOilData(CarsOilText) {
+            const CarsOilRows = CarsOilText.split('\n').map(row => {
                 const cells = [];
                 let current = '';
                 let inQuotes = false;
@@ -2013,7 +2013,7 @@
                 return cells;
             });
             
-            return carsRows.slice(1)
+            return CarsOilRows.slice(1)
                 .filter(row => row.length >= 3 && row[0] && row[0].trim()) 
                 .map(row => {
                     const carModel = row[0] || '';  // العمود A
@@ -2123,7 +2123,7 @@
                 await loadData();
                 
                 // التأكد من تحميل البيانات
-                if (carsData.length === 0 || stockData.length === 0) {
+                if (CarsOilData.length === 0 || stockData.length === 0) {
                     console.log('إعادة محاولة تحميل البيانات...');
                     await new Promise(resolve => setTimeout(resolve, 2000));
                     await loadData();
@@ -2132,7 +2132,7 @@
                 setupDraggableElements();
                 startAutoUpdate();
                 
-                console.log(`تم تحميل ${carsData.length} سيارة و ${stockData.length} زيت بنجاح`);
+                console.log(`تم تحميل ${CarsOilData.length} سيارة و ${stockData.length} زيت بنجاح`);
                 
                 // التحقق من التحديثات بعد 10 ثوانٍ من التحميل
                 setTimeout(checkForUpdates, 10000);
