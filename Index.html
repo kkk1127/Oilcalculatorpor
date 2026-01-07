@@ -542,12 +542,9 @@
             console.log('محاولة تحميل البيانات من Google Sheets...');
             
             try {
-                // رابط السيارات الجديد
-                const carsSheetId = '1-hVGrK0SqiLgXV_zaqhh2bqYCjjr4Q28jzWU8gG6jTU';
-                // رابط المخزون القديم
+                const carsSheetId = '1x2ongtstODqEEWh_jAwN8zLHjsYeIppk8EH_Q1CXMzk';
                 const stockSheetId = '1ax4pCBDTm6Vkq-MZjmmOY1dgwKCUQS5x1GeffkUYOzI';
                 
-                // تحميل بيانات السيارات والمخزون بشكل متوازي
                 const [carsResponse, stockResponse] = await Promise.all([
                     fetch(`https://docs.google.com/spreadsheets/d/${carsSheetId}/gviz/tq?tqx=out:csv&sheet=Cars&timestamp=${Date.now()}`),
                     fetch(`https://docs.google.com/spreadsheets/d/${stockSheetId}/gviz/tq?tqx=out:csv&sheet=Stock&timestamp=${Date.now()}`)
