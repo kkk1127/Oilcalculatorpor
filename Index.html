@@ -2049,6 +2049,17 @@
             const stockRows = stockText.split('\n').map(row => {
                 return row.split(',').map(cell => cell.replace(/"/g, '').trim());
             });
+
+            function isEnabledCell(value) {
+                if (value == null) return true;
+                const normalized = String(value).trim().toLowerCase();
+                if (!normalized) return true;
+                // اعتبر القيم التالية كـ غير مفعل
+                if (['غير مفعل', 'غيرمفعل', 'disable', 'disabled', 'no', '0', 'false', 'off'].includes(normalized)) {
+                    return false;
+                }
+                return true;
+            }
             
             return stockRows.slice(1)
                 .filter(row => row.length >= 6 && row[0])
@@ -2060,9 +2071,10 @@
                     priceLiter: parseFloat(row[4]) || 0,
                     country: row[5] || '',
                     contAvailable: parseInt(row[6]) || 0,
-                    brandOfOil: row[7] || row[9] || row[11] || row[13] || row[15] || row[17] || row[1] || row[19] || ''
+                    brandOfOil: row[7] || row[9] || row[11] || row[13] || row[15] || row[17] || row[1] || row[19] || '',
+                    enabled: isEnabledCell(row[10]) // العمود K للتحكم (Enable/Disable)
                 }))
-                .filter(item => item.brand && item.type && item.price > 0 && item.contAvailable > 0);
+                .filter(item => item.brand && item.type && item.price > 0 && item.contAvailable > 0 && item.enabled);
         }
         
         // تحديث العرض الحالي
