@@ -829,19 +829,24 @@
                 
                 oilsHtml += `
                     <div class="glass-effect p-4 rounded-lg border-l-4 border-yellow-500">
-                        <div class="flex justify-between items-start mb-2">
-                            <div>
+                        <div class="flex flex-col md:flex-row justify-between items-start md:items-center gap-4 mb-2">
+                            <div class="min-w-[180px]">
                                 <h4 class="text-lg font-bold text-yellow-400">${translateBrand(oil.brand)}</h4>
                                 <p class="text-gray-300 text-sm">اللزوجة: ${oil.type}</p>
                                 <p class="text-gray-300 text-sm">السعر: ${oil.price} د.ك / لتر</p>
-                                <p class="text-blue-400 text-sm">متوفر: ${oil.contAvailable} لتر</p>
+                            </div>
+                            <div class="bg-yellow-900 bg-opacity-30 p-2.5 rounded-lg border border-yellow-600/30 text-xs space-y-1 flex-1 max-w-xs">
+                                <p class="text-yellow-300 font-semibold mb-1">تفاصيل الكمية:</p>
+                                <p class="text-gray-300">• المتوفر في المخزن: <span class="text-green-400 font-bold">${oil.warehouseLiters || 0} لتر</span></p>
+                                <p class="text-gray-300">• المتوفر في الباص: <span class="text-yellow-400 font-bold">${oil.busLiters || 0} لتر</span></p>
+                                <p class="text-gray-300">• الإجمالي الكلي المتوفر: <span class="text-blue-400 font-bold">${oil.contAvailable} لتر</span></p>
                             </div>
                             <div class="text-right">
                                 <p class="text-xl font-bold text-green-400">${grandTotal.toFixed(3)} د.ك</p>
                                 <p class="text-gray-400 text-sm">المجموع الكلي</p>
                             </div>
                         </div>
-                        <div class="flex justify-between items-center mt-3">
+                        <div class="flex justify-between items-center mt-3 border-t border-yellow-600/20 pt-2">
                             <div class="text-sm text-gray-400">
                                 الزيت: ${oilTotal.toFixed(3)} + الفلتر: ${filterPrice} + الخدمة: ${servicePrice}
                             </div>
@@ -915,19 +920,24 @@
                 
                 oilsHtml += `
                     <div class="glass-effect p-4 rounded-lg border-l-4 border-yellow-500">
-                        <div class="flex justify-between items-start mb-2">
-                            <div>
+                        <div class="flex flex-col md:flex-row justify-between items-start md:items-center gap-4 mb-2">
+                            <div class="min-w-[180px]">
                                 <h4 class="text-lg font-bold text-yellow-400">${translateBrand(oil.brand)}</h4>
                                 <p class="text-gray-300 text-sm">اللزوجة: ${oil.type}</p>
                                 <p class="text-gray-300 text-sm">السعر: ${oil.price} د.ك / لتر</p>
-                                <p class="text-blue-400 text-sm">متوفر: ${oil.contAvailable} لتر</p>
+                            </div>
+                            <div class="bg-yellow-900 bg-opacity-30 p-2.5 rounded-lg border border-yellow-600/30 text-xs space-y-1 flex-1 max-w-xs">
+                                <p class="text-yellow-300 font-semibold mb-1">تفاصيل الكمية:</p>
+                                <p class="text-gray-300">• المتوفر في المخزن: <span class="text-green-400 font-bold">${oil.warehouseLiters || 0} لتر</span></p>
+                                <p class="text-gray-300">• المتوفر في الباص: <span class="text-yellow-400 font-bold">${oil.busLiters || 0} لتر</span></p>
+                                <p class="text-gray-300">• الإجمالي الكلي المتوفر: <span class="text-blue-400 font-bold">${oil.contAvailable} لتر</span></p>
                             </div>
                             <div class="text-right">
                                 <p class="text-xl font-bold text-green-400">${grandTotal.toFixed(3)} د.ك</p>
                                 <p class="text-gray-400 text-sm">المجموع الكلي</p>
                             </div>
                         </div>
-                        <div class="flex justify-between items-center mt-3">
+                        <div class="flex justify-between items-center mt-3 border-t border-yellow-600/20 pt-2">
                             <div class="text-sm text-gray-400">
                                 الزيت: ${oilTotal.toFixed(3)} + الفلتر: ${filterPrice} + الخدمة: ${servicePrice}
                             </div>
@@ -1051,19 +1061,24 @@
                     
                     allOilsHtml += `
                         <div class="glass-effect p-4 rounded-lg border-l-4 border-yellow-500">
-                            <div class="flex justify-between items-start mb-2">
-                                <div>
+                            <div class="flex flex-col md:flex-row justify-between items-start md:items-center gap-4 mb-2">
+                                <div class="min-w-[180px]">
                                     <h5 class="text-lg font-bold text-yellow-400">${translateBrand(oil.brand)}</h5>
                                     <p class="text-gray-300 text-sm">اللزوجة: ${oil.viscosity}</p>
                                     <p class="text-gray-300 text-sm">السعر: ${oil.price} د.ك / لتر</p>
-                                    <p class="text-blue-400 text-sm">متوفر: ${oil.contAvailable} لتر</p>
+                                </div>
+                                <div class="bg-yellow-900 bg-opacity-30 p-2.5 rounded-lg border border-yellow-600/30 text-xs space-y-1 flex-1 max-w-xs">
+                                    <p class="text-yellow-300 font-semibold mb-1">تفاصيل الكمية:</p>
+                                    <p class="text-gray-300">• المتوفر في المخزن: <span class="text-green-400 font-bold">${oil.warehouseLiters || 0} لتر</span></p>
+                                    <p class="text-gray-300">• المتوفر في الباص: <span class="text-yellow-400 font-bold">${oil.busLiters || 0} لتر</span></p>
+                                    <p class="text-gray-300">• الإجمالي الكلي المتوفر: <span class="text-blue-400 font-bold">${oil.contAvailable} لتر</span></p>
                                 </div>
                                 <div class="text-right">
                                     <p class="text-xl font-bold text-green-400">${grandTotal.toFixed(3)} د.ك</p>
                                     <p class="text-gray-400 text-sm">المجموع الكلي</p>
                                 </div>
                             </div>
-                            <div class="text-sm text-gray-400 mt-3">
+                            <div class="text-sm text-gray-400 mt-3 border-t border-yellow-600/20 pt-2">
                                 الزيت: ${oilTotal.toFixed(3)} + الفلتر: ${filterPrice} + الخدمة: ${servicePrice}
                             </div>
                         </div>
@@ -2047,14 +2062,29 @@
         // معالجة بيانات المخزون
         function processStockData(stockText) {
             const stockRows = stockText.split('\n').map(row => {
-                return row.split(',').map(cell => cell.replace(/"/g, '').trim());
+                const cells = [];
+                let current = '';
+                let inQuotes = false;
+                
+                for (let i = 0; i < row.length; i++) {
+                    const char = row[i];
+                    if (char === '"') {
+                        inQuotes = !inQuotes;
+                    } else if (char === ',' && !inQuotes) {
+                        cells.push(current.trim().replace(/"/g, ''));
+                        current = '';
+                    } else {
+                        current += char;
+                    }
+                }
+                cells.push(current.trim().replace(/"/g, ''));
+                return cells;
             });
 
             function isEnabledCell(value) {
                 if (value == null) return true;
                 const normalized = String(value).trim().toLowerCase();
                 if (!normalized) return true;
-                // اعتبر القيم التالية كـ غير مفعل
                 if (['غير مفعل', 'غيرمفعل', 'disable', 'disabled', 'no', '0', 'false', 'off'].includes(normalized)) {
                     return false;
                 }
@@ -2063,20 +2093,35 @@
             
             return stockRows.slice(1)
                 .filter(row => row.length >= 6 && row[0])
-                .map(row => ({
-                    brand: row[0] || '',
-                    type: row[1] || '',
-                    price: parseFloat(row[2]) || 0,
-                    liters: parseInt(row[3]) || 0,
-                    priceLiter: parseFloat(row[4]) || 0,
-                    country: row[5] || '',
-                    contAvailable: parseInt(row[6]) || 0,
-                    brandOfOil: row[7] || row[9] || row[11] || row[13] || row[15] || row[17] || row[1] || row[19] || '',
-                    enabled: isEnabledCell(row[10]) // العمود K للتحكم (Enable/Disable)
-                }))
+                .map(row => {
+                    const totalLitersF = parseInt(row[5]) || 0; // العمود F: الإجمالي الكلي المتوفر
+                    const busLitersG = parseInt(row[6]) || 0;    // العمود G: المتوفر في الباص / Store
+                    const driverH = row[7] || ''; // العمود H: السائق الأول
+                    const driverI = row[8] || ''; // العمود I: السائق الثاني
+                    
+                    // المتوفر في المخزن = الإجمالي الكلي - المتوفر في الباص (أو القيمة المتوفرة مباشرة)
+                    let warehouseLiters = totalLitersF >= busLitersG ? (totalLitersF - busLitersG) : (parseInt(row[3]) || 0);
+
+                    return {
+                        brand: row[0] || '',
+                        type: row[1] || '',
+                        price: parseFloat(row[2]) || 0,
+                        liters: parseInt(row[3]) || 0,
+                        priceLiter: parseFloat(row[4]) || 0,
+                        country: row[5] || '',
+                        contAvailable: totalLitersF > 0 ? totalLitersF : (busLitersG + warehouseLiters), // الإجمالي الكلي
+                        warehouseLiters: warehouseLiters, // المتوفر في المخزن
+                        busLiters: busLitersG, // المتوفر في الباص
+                        store: row[6] || '',
+                        driver1: driverH,
+                        driver2: driverI,
+                        brandOfOil: row[7] || row[9] || row[11] || row[13] || row[15] || row[17] || row[1] || row[19] || '',
+                        enabled: isEnabledCell(row[10])
+                    };
+                })
                 .filter(item => item.brand && item.type && item.price > 0 && item.contAvailable > 0 && item.enabled);
         }
-        
+
         // تحديث العرض الحالي
         function refreshCurrentView() {
             const currentStep = document.querySelector('.step:not(.hidden)');
